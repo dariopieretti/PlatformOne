@@ -20,7 +20,7 @@ urlscan_api_key = ''
 API_KEY_HA = ''
 API_KEY_FS = ''
 API_KEYAIP = ''
-CONFIG_FILE = 'config.json.prod'
+CONFIG_FILE = 'config.json'
 
 chiamateAPI_abuseIPDB = 0
 
