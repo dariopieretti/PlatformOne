@@ -20,6 +20,7 @@ urlscan_api_key = ''
 API_KEY_HA = ''
 API_KEY_FS = ''
 API_KEYAIP = ''
+CONFIG_FILE = 'config.json.prod'
 
 chiamateAPI_abuseIPDB = 0
 
@@ -495,7 +496,7 @@ def leaks_templates():
     return render_template('leaked_mail.html')
 
 if __name__ == '__main__':
-    with open('config.json', 'r') as r_f:
+    with open(CONFIG_FILE, 'r') as r_f:
         config = json.load(r_f)
         API_KEY  = config['API_KEY']
         API_KEY_HA  = config['API_KEY_HA']
