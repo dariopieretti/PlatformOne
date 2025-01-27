@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report VirusTotal</title>
+    <style>
+        .header {
+            position: fixed; /* Posiziona la navbar in modo fisso */
+            top: 0; /* Posiziona la navbar in alto */
+            left: 0;
+            width: 80%; /* Imposta la larghezza al 100% della finestra */
+            padding: 1.3rem 10%;
+            background-color: rgba(0, 0, 0, .1);
+            backdrop-filter: blur(50px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px; /* Aggiunto margine sinistro */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #dadada;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 2.5rem;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #4eaa02;
+        }
+
+        .navbar a.active {
+            background-color: #555;
+            color: white;
+        }
+        body {
+            font-family: Titillium Web;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Colore di sfondo */
+            color: #f5f5f5;
+        }
+
+        h1 {
+            color: #f5f5f5; /* Colore del testo per i titoli */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            background-color: #414141; /* Colore di sfondo */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            background-color: #414141; /* Colore di sfondo */
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-content">
+            <img src="{{ url_for('static', filename='assets/img/cyber-security.png') }}" alt="PlatformOne" width="50" height="50">
+            <a class="logo">PlatformOne</a>
+        </div>
+        <div class="navbar">
+            <div>
+                <a href={{ url_for("index") }}>Home</a>
+                <a href={{ url_for("api_key_page") }}>Api key</a>
+                <a href={{ url_for("playbooks_templates") }}>Playbooks & Templates</a>
+            </div>
+        </div>
+    </header>
+    <h1 style="margin-top: 100px;">Report per l'indirizzo IP: {{ ip }}</h1>
+    <div class="container">
+        <h2>Report Virustotal</h2>
+        <p>Name: {{ name_ip }}</p>
+        <p>Country: {{ country_ip }}</p>
+        <p>CN:  {{  cn_ip  }}</p>
+        {% if Fortinet_verdict_ip %}
+            <p>Report Fortinet: {{ Fortinet_verdict_ip }}</p>
+        {% else %}
+            <p>Nessun report disponibile per questo indirizzo IP.</p>
+        {% endif %}
+        
+        {% if Forcepoint_verdict_ip %}
+            <p>Report Forcepoint: {{ Forcepoint_verdict_ip }}</p>
+        {% else %}
+            <p>Nessun report disponibile per questo indirizzo IP.</p>
+        {% endif %}
+        
+        <p>Harmless: {{ total_harmless_verdict_ip }} </p>
+        <p>Malicious: {{ total_malicious_verdict_ip }}</p>
+    </div>
+    <div class="container">
+        <h2>Report AbuseIPDB</h2>
+        <p>Score AbuseIPDB:  {{  AIP_score }}</p>
+        <p>Usage Type:  {{  AIP_usage }}</p>
+        <p>ISP:  {{  AIP_isp }}</p>
+        <p>Nodo TOR:  {{  AIP_isTor }}</p>
+        <p>Total Report nell'ultimo anno:  {{  AIP_totalReport }}</p>
+        <h3 style="margin-bottom: -15px;">Report Categories:</h3>
+        <ul>
+            {% for categories in report_categories %}
+                <li>{{ categories }} - {{ report_categories[categories] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</body>
+</html>

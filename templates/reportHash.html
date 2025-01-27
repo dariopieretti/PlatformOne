@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report VirusTotal</title>
+    <style>
+        .header {
+            position: fixed; /* Posiziona la navbar in modo fisso */
+            top: 0; /* Posiziona la navbar in alto */
+            left: 0;
+            width: 80%; /* Imposta la larghezza al 100% della finestra */
+            padding: 1.3rem 10%;
+            background-color: rgba(0, 0, 0, .1);
+            backdrop-filter: blur(50px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px; /* Aggiunto margine sinistro */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #dadada;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 2.5rem;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #4eaa02;
+        }
+
+        .navbar a.active {
+            background-color: #555;
+            color: white;
+        }
+        body {
+            font-family: Titillium Web;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Colore di sfondo */
+            color: #f5f5f5;
+        }
+
+        h1 {
+            color: #f5f5f5; /* Colore del testo per i titoli */
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            background-color: #414141; /* Colore di sfondo */
+        }
+
+        h1 {
+            color: #f5f5f5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-size: 18px;
+        }
+
+        button {
+            background-color: #19d600;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+        }
+
+        button:hover {
+            background-color: #4eaa02;
+        }
+
+        .urlscan-box {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            overflow: hidden; /* Aggiunto per assicurare che il contenuto non esca dal contenitore */
+        }
+
+        .screenshot {
+            max-width: 100%;
+            margin-top: 20px;
+            width: 100%; /* Aggiunto per assicurare che l'immagine non superi la larghezza massima del contenitore */
+        }
+
+        .full-screen-link {
+            display: block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Aggiunto per nascondere il testo in eccesso se il link supera la larghezza massima */
+            white-space: nowrap; /* Aggiunto per evitare che il testo si spezzi su più righe */
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 120px;
+            border-radius: 20px;
+        }
+
+        /* Aggiungi stili per la barra di avanzamento */
+        progress {
+            width: 100%; /* Assicura che la barra di avanzamento si estenda al massimo possibile */
+        }
+
+        /* Aggiungi stili per il riempimento della barra di avanzamento */
+        progress[value]::-webkit-progress-value {
+            background-color: #4CAF50; /* Colore di riempimento della barra di avanzamento */
+        }
+
+        progress[value]::-moz-progress-bar {
+            background-color: #4CAF50; /* Colore di riempimento della barra di avanzamento per Firefox */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-content">
+            <img src="{{ url_for('static', filename='assets/img/cyber-security.png') }}" alt="PlatformOne" width="50" height="50">
+            <a class="logo">PlatformOne</a>
+        </div>
+        <div class="navbar">
+            <div>
+                <a href={{ url_for("index") }}>Home</a>
+                <a href={{ url_for("api_key_page") }}>Api key</a>
+                <a href={{ url_for("playbooks_templates") }}>Playbooks & Templates</a>
+            </div>
+        </div>
+    </header>
+    <h1 style="margin-top: 100px;">Hash analizzato</h1>
+    <h2><span class="url-text">{{ hash }}</span></h2>
+    <div class="container">
+        <h1>Hash Report Virustotal</h1>
+        <ul>
+            <li>Nome File: {{ name_file }}</li>
+            <li>File Type: {{ file_type }}</li>
+            <li style="font-size: 18px;">Verdetto Symantec: <strong>{{ symantec_verdict }}</strong></li>
+            <li style="font-size: 18px;">Verdetto Fortinet: <strong>{{ fortinet_verdict }}</strong></li>
+            <li style="font-size: 18px;">Verdetto Trend Micro: <strong>{{ trend_micro_verdict }}</strong></li>
+            <li>Data di scansione: {{ scan_date_hash }}</li>
+            <li>Malicious: {{ positives_hash }}</li>
+            <li>Harmless: {{ total_hash }}</li>
+        </ul>
+        <a href="{{ report_hash_vt }}" target="_blank"><button>Visualizza su VirusTotal</button></a>
+        <div class="button-container"> <!-- Aggiunto un contenitore per i pulsanti -->
+        </div>
+    </div>
+    <div class="container">
+        <h1>Hash Report FileScan.io</h1>
+        <ul>
+            <li style="font-size: 18px;">Verdetto FileScan: <strong>{{ reputation_fs }}</strong></li> 
+            <li>Data di scansione FileScan: {{ scan_date_fs }}</li> 
+        </ul>    
+    </div>
+    <div class="container">
+        <h1>Hash Report Hybrid Analysis</h1>
+        <ul>
+            <li style="font-size: 18px;">Verdetto Hybrid Analysis: <strong>{{ reputation_HA }}</strong></li> 
+            <li>Type: {{ type_HA }}</li>
+            <li>Size: {{ size_HA }} KB</li>
+            <li>Verdetto CrowdStrike: {{ scannerHA_Crowd }}</li>
+            <li>Verdetto MetaDefender: {{ scannerHA_Meta }}</li>
+            <li>Threat Score: {{ threat_score_HA }} <progress id="threat-score" max=100 value={{ threat_score_HA }}></progress></li>  
+        </ul>
+        <a href="https://www.hybrid-analysis.com/sample/{{ hash }}" target="_blank"><button>Visualizza su Hybrid Analysis</button></a>
+    </div>
+    <div class="container">
+        <h1>Hash Report MalwareBazaar</h1>
+        <ul>
+            <li>Nome file: {{ MB_result[0] }}</li>
+            <li>Verdict Yoroi: {{ MB_result[1] }}</li>
+            <li>Verdict CERT-PL MWDB: {{ MB_result[2] }}</li>
+            <li>Verdict Cape: {{ MB_result[3] }}</li>
+            <li>Verdict Spamhaus: {{ MB_result[4] }}</li>
+            <li>Verdict InQuest: {{ MB_result[5] }}</li>
+        </ul>
+        <a href="https://bazaar.abuse.ch/sample/{{ hash }}" target="_blank"><button>Visualizza su Malware Bazar</button></a>
+    </div>
+</body>
+</html>

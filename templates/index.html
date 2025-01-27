@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlatformOne</title>
+    <style>
+        .header {
+            position: fixed; /* Posiziona la navbar in modo fisso */
+            top: 0; /* Posiziona la navbar in alto */
+            left: 0;
+            width: 80%; /* Imposta la larghezza al 100% della finestra */
+            padding: 1.3rem 10%;
+            background-color: rgba(0, 0, 0, .1);
+            backdrop-filter: blur(50px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px; /* Aggiunto margine sinistro */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #dadada;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 2.5rem;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #4eaa02;
+        }
+
+        .navbar a.active {
+            background-color: #555;
+            color: white;
+        }
+        /* Stili CSS per centrare il contenuto */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Altezza della finestra visualizzata */
+            margin: 0;
+            font-family: Titillium Web;
+            background-color: #333; /* Colore di sfondo */
+            color: #f5f5f5;
+        }
+
+        h3 {
+            color: #b6b6b6; /* Colore del testo per i titoli */
+        }
+
+        /* Nuovo stile per il contenitore principale */
+        .main-container {
+            text-align: center;
+            display: flex; /* Usa Flexbox */
+            flex-direction: column; /* Imposta la direzione su colonna */
+            margin-top: 80px; /* Altezza della navbar + 30px di margine aggiunti per distanza */
+        }
+
+        /* Stile per il container dell'URL */
+        .container {
+            margin-bottom: 20px; /* Aggiunge spazio sotto il container */
+        }
+
+        /* Stili comuni per input e pulsanti */
+        input[type="text"] {
+            width: 300px; /* Lunghezza desiderata per l'input */
+            padding: 10px; /* Aggiunge spazio attorno al testo nell'input */
+            font-size: 16px; /* Dimensione del testo nell'input */
+            text-align: center;
+            border-radius: 15px; /* Angoli arrotondati */
+        }
+
+        button[type="submit"] {
+            padding: 11px 20px; /* Aumenta il padding per rendere il pulsante più grande */
+            font-size: 16px; /* Dimensione del testo nel pulsante */
+            border-radius: 15px; /* Angoli arrotondati */
+            cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+            background-color: #19d600; /* Colore di sfondo */
+            color: #1a1a1a;
+            border: none; /* Rimuove il bordo */
+            transition: background-color 0.3s; /* Aggiunge una transizione al cambio di colore */
+            border-color: #000000;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4eaa02; /* Cambia il colore di sfondo al passaggio del mouse */
+            border-color: #000000;
+        }
+
+        label {
+            border-width: 2px;
+            border-style: solid;
+            border-color: rgb(68, 68, 68);
+            background-color: rgb(255, 255, 255);
+            color: rgba(117,117,161,255); /* Colore del testo */;
+            padding: 7px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 200px;
+            transition: background-color 0.3s; /* Aggiunge una transizione al cambio di colore */
+        }
+
+        label:hover {
+            background-color: #b8b8b8; /* Cambia il colore di sfondo al passaggio del mouse */
+        }
+
+        .selected-file {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 400px;
+            text-align: center;
+            margin-left: 100px;
+            background-color: #414141; /* Colore di sfondo */
+        }
+
+
+        
+    </style>
+    <script>
+        function checkURL() {
+            var url = document.getElementById('url').value;
+            var analyzeButton = document.getElementById('analyze-button-url');
+            if (url.trim() === '') {
+                analyzeButton.disabled = true;
+            } else {
+                analyzeButton.disabled = false;
+            }
+        }
+
+        function checkIP() {
+            var ip = document.getElementById('ip').value;
+            var analyzeButton = document.getElementById('analyze-button-ip');
+            var ipError = document.getElementById('ip-error');
+
+            // Definisci un'espressione regolare per validare l'indirizzo IP
+            var ipPattern = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
+
+            // Controlla se l'indirizzo IP è vuoto o non corrisponde al modello
+            if (ip.trim() === '' || !ipPattern.test(ip)) {
+                analyzeButton.disabled = true;
+                ipError.style.display = 'block'; // Mostra il messaggio di errore
+            } else {
+                analyzeButton.disabled = false;
+                ipError.style.display = 'none'; // Nascondi il messaggio di errore
+            }
+
+            // Se il campo IP è vuoto, nascondi il messaggio di errore
+            if (ip.trim() === '') {
+                ipError.style.display = 'none';
+            }
+        }
+
+        function checkHash() {
+            var hash = document.getElementById('hash').value;
+            var analyzeButton = document.getElementById('analyze-button2');
+            if (hash.trim() === '') {
+                analyzeButton.disabled = true;
+            } else {
+                analyzeButton.disabled = false;
+            }
+        }
+
+        function showSelectedFileName() {
+            var fileInput = document.getElementById('email');
+            var selectedFileText = document.getElementById('selected-file-text');
+            selectedFileText.textContent = fileInput.files[0].name;
+        }
+
+            // Funzione per verificare l'estensione del file selezionato
+        function checkFileExtension() {
+            var fileInput = document.getElementById('email');
+            var selectedFile = fileInput.files[0];
+            var analyzeButton = document.getElementById('analyze-button');
+
+            // Verifica se è stato selezionato un file
+            if (selectedFile) {
+                var fileName = selectedFile.name;
+                var fileExtension = fileName.split('.').pop().toLowerCase(); // Ottieni l'estensione del file
+
+                // Abilita il pulsante se l'estensione del file è .msg, altrimenti disabilitalo
+                if (fileExtension === '.msg') {
+                    analyzeButton.disabled = false;
+                } else {
+                    analyzeButton.disabled = true;
+                }
+            } else {
+                // Se nessun file è stato selezionato, disabilita il pulsante
+                analyzeButton.disabled = true;
+            }
+        }
+
+    // Aggiungi un listener per l'evento change dell'input file
+    document.getElementById('email').addEventListener('change', checkFileExtension);
+
+
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-content">
+            <img src="{{ url_for('static', filename='assets/img/cyber-security.png') }}" alt="PlatformOne" width="50" height="50">
+            <a href={{ url_for("index") }} class="logo">PlatformOne</a>
+        </div>
+        <div class="navbar">
+            <div>
+                <a href={{ url_for("index") }}>Home</a>
+                <a href={{ url_for("api_key_page") }}>Api key</a>
+                <a href={{ url_for("playbooks_templates") }}>Playbooks & Templates</a>
+                <a href={{ url_for("leaks_templates") }}>Leaks</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <h1>Inserisci l'IP da analizzare</h1>
+            <form action="/get_report_ip" method="post">
+                <input type="text" id="ip" name="ip" placeholder="Inserisci un IP qui" oninput="checkIP()">
+                <span id="ip-error" style="color: red; display: none;">Inserisci un indirizzo IP valido</span>
+                <button type="submit" id="analyze-button-ip" disabled>Analizza</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <h1>Inserisci l'URL o dominio da analizzare</h1>
+            <form action="/get_report" method="post">
+                <input type="text" id="url" name="url" placeholder="Inserisci un URL qui" oninput="checkURL()">
+                <button type="submit" id="analyze-button-url" disabled>Analizza</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <h1>Inserisci l'hash da analizzare</h1>
+            <form action="/get_hash_report" method="post">
+                <input type="text" id="hash" name="hash" placeholder="Inserisci un hash qui" oninput="checkHash()">
+                <button type="submit" id="analyze-button2" disabled>Analizza</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <h1>Inserisci una email da analizzare (.msg)</h1>
+            <form action="/analyze_email" method="post" enctype="multipart/form-data">
+                <input type="file" id="email" name="email" accept=".msg" hidden onchange="showSelectedFileName()">
+                <span id="selected-file-text" class="selected-file"></span>
+                <label for="email" class="upload-button">Scegli File</label>
+                <button type="submit" class="upload-button">Analizza</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

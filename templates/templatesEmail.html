@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Report Email</title>
+        <style>
+            /* Stili CSS per il report */
+            body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                    margin-top: 100px;
+                    background-color: #333;
+                    color: #f5f5f5;
+                }
+    
+                h1 {
+                    color: #333;
+                    text-align: center;
+                    margin: 40px auto;
+                    padding: 20px;
+                }
+    
+                .container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+      
+                .template-email {
+                    max-width: 600px;
+                    margin: 40px auto;
+                    padding: 10px;
+                    border: 2px solid #ccc;
+                    border-radius: 15px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    word-wrap: break-word;
+                    text-align: left;
+                }
+    
+                button {
+                    background-color: #007bff;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+                }
+    
+                button:hover {
+                    background-color: #0056b3;
+                }
+    
+                .button-template {
+                    background-color: #19d600;
+                    color:#333;
+                    border: none;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+                }
+    
+                .button-template:hover {
+                    background-color: #4eaa02;
+                }
+    
+                .back-button {
+                    position: fixed;
+                    top: 20px;
+                    right: 120px;
+                    border-radius: 20px;
+                }
+    
+                .button-container {
+                    text-align: center; /* Allinea i pulsanti al centro */
+                }
+    
+                .button-container button {
+                    display: inline-block; /* Mostra i pulsanti sulla stessa riga */
+                    margin: 0 10px; /* Aggiunge un po' di spazio tra i pulsanti */
+                }
+    
+        </style>
+    </head>
+<body>
+<div class="button-container">
+    <a href="/" class="back-button" style="text-decoration: none;"><button>Back</button></a>
+    <button class="button-template" id="showTextButton1">Template email lecita</button>
+    <button class="button-template" id="showTextButton2">Template email di phishing</button>
+    <button class="button-template" id="showTextButton3">Template email con allegato malevolo</button>
+    <button class="button-template" id="showTextButton4">Template email estorsione</button>
+    <button class="button-template" id="showTextButton5">Template email social engineering</button>
+</div>
+<div class="template-email" id="textArea1" style="display: none;">
+    Buongiorno,<br>
+    grazie per la segnalazione.<br>
+    Dall'analisi di questa email non abbiamo rilevato alcun parametro malevolo: sia il mittente che il link contenuto nel messaggio non rappresentano una minaccia.<br><br>
+
+    Se non si aspettava questa email o non si è interessati al suo contenuto, può ignorarla e/o eliminarla.<br><br>
+
+    Cordiali saluti
+</div>
+
+<div class="template-email" id="textArea2" style="display: none;">
+    Buongiorno,<br>
+    grazie per la segnalazione.<br>
+    Dall'analisi delle e-mail risulta che si tratta di un tentativo di phishing.<br><br>
+
+    La mail contiene un collegamento e/o link malevolo che tenta di contattare siti sospetti o malevoli.<br><br>
+
+    Può ignorare l'e-mail ed eliminarla.<br>
+    Vi preghiamo di contattarci tempestivamente se avete inserito credenziali aziendali o altri dati rilevanti.<br><br>
+
+    Cordiali saluti
+</div>
+
+<div class="template-email" id="textArea3" style="display: none;">
+    Buongiorno,<br>
+    grazie per la segnalazione.<br>
+    Dall'analisi delle e-mail risulta che si tratta di un tentativo di phishing.<br><br>
+
+    La mail contiene un allegato malevolo che [inserire la descrizione dell'allegato].<br><br>
+
+    Può ignorare l'e-mail ed eliminarla.<br>
+    Vi preghiamo di contattarci tempestivamente se avete inserito credenziali aziendali o altri dati rilevanti.<br><br>
+
+    Cordiali saluti
+</div>
+
+<div class="template-email" id="textArea4" style="display: none;">
+    Buongiorno,<br>
+    grazie per la segnalazione.<br>
+    Dall'analisi delle e-mail risulta che il messaggio fa parte di una finta campagna di estorsione, volta a spaventare il destinatario con informazioni
+    del tutto false, convincendolo a pagare una somma in cambio della cancellazione delle informazioni raccolte sull'utente.<br>
+    [Se l'aggressore ha falsificato il mittente aggiungere: Il vero mittente non è [mittente falsificato]: l'aggressore ha utilizzato una tecnica di spoofing,
+    progettata per indurre gli utenti a pensare che un messaggio provenga da una persona o entità conosciuta/legittima.]<br>
+
+    Può ignorare l'e-mail ed eliminarla.<br>
+    Vi preghiamo di contattarci tempestivamente se avete inserito credenziali aziendali o altri dati rilevanti.<br><br>
+
+    Cordiali saluti
+</div>
+
+<div class="template-email" id="textArea5" style="display: none;">
+    Buongiorno,<br>
+    grazie per la segnalazione.<br>
+    [Se l'aggressore ha falsificato il mittente aggiungere: Il vero mittente non è [mittente falsificato]: l'aggressore ha utilizzato una tecnica di spoofing,
+    progettata per indurre gli utenti a pensare che un messaggio provenga da una persona o entità conosciuta/legittima.]<br>
+    Dall'analisi delle e-mail risulta che l'e-mail ha lo scopo di stabilire un contatto al fine di eseguire future azioni dannose/fraudolente.<br><br>
+
+    Può ignorare l'e-mail ed eliminarla.<br>
+    Vi preghiamo di contattarci tempestivamente se avete inserito credenziali aziendali o altri dati rilevanti.<br><br>
+
+    Cordiali saluti
+</div>
+
+<script>
+    function scrollToElement(element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+}
+    // Ottieni il riferimento ai pulsanti e alle aree di testo
+    const showTextButton1 = document.getElementById('showTextButton1');
+    const textArea1 = document.getElementById('textArea1');
+    const showTextButton2 = document.getElementById('showTextButton2');
+    const textArea2 = document.getElementById('textArea2');
+    const showTextButton3 = document.getElementById('showTextButton3');
+    const textArea3 = document.getElementById('textArea3');
+    const showTextButton4 = document.getElementById('showTextButton4');
+    const textArea4 = document.getElementById('textArea4');
+    const showTextButton5 = document.getElementById('showTextButton5');
+    const textArea5 = document.getElementById('textArea5');
+
+    // Aggiungi un gestore di eventi per il clic sui pulsanti
+    showTextButton1.addEventListener('click', function() {
+        // Verifica se l'area di testo è già visibile
+        if (textArea1.style.display === 'block') {
+            textArea1.style.display = 'none'; // Nascondi l'area di testo
+        } else {
+            // Mostra l'area di testo corrispondente al pulsante 1 e nasconde le altre
+            textArea1.style.display = 'block';
+            textArea2.style.display = 'none';
+            textArea3.style.display = 'none';
+            textArea4.style.display = 'none';
+            textArea5.style.display = 'none';
+            scrollToElement(textArea1); // Scorri la pagina verso l'area di testo
+        }
+    });
+
+    showTextButton2.addEventListener('click', function() {
+        // Verifica se l'area di testo è già visibile
+        if (textArea2.style.display === 'block') {
+            textArea2.style.display = 'none'; // Nascondi l'area di testo
+        } else {
+            // Mostra l'area di testo corrispondente al pulsante 1 e nasconde le altre
+            textArea2.style.display = 'block';
+            textArea1.style.display = 'none';
+            textArea3.style.display = 'none';
+            textArea4.style.display = 'none';
+            textArea5.style.display = 'none';
+            scrollToElement(textArea2); // Scorri la pagina verso l'area di testo
+        }
+    });
+
+    showTextButton3.addEventListener('click', function() {
+        // Verifica se l'area di testo è già visibile
+        if (textArea3.style.display === 'block') {
+            textArea3.style.display = 'none'; // Nascondi l'area di testo
+        } else {
+            // Mostra l'area di testo corrispondente al pulsante 1 e nasconde le altre
+            textArea3.style.display = 'block';
+            textArea2.style.display = 'none';
+            textArea1.style.display = 'none';
+            textArea4.style.display = 'none';
+            textArea5.style.display = 'none';
+            scrollToElement(textArea3);
+        }
+    });
+
+    showTextButton4.addEventListener('click', function() {
+        // Verifica se l'area di testo è già visibile
+        if (textArea4.style.display === 'block') {
+            textArea4.style.display = 'none'; // Nascondi l'area di testo
+        } else {
+            // Mostra l'area di testo corrispondente al pulsante 1 e nasconde le altre
+            textArea4.style.display = 'block';
+            textArea2.style.display = 'none';
+            textArea3.style.display = 'none';
+            textArea1.style.display = 'none';
+            textArea5.style.display = 'none';
+            scrollToElement(textArea4); 
+        }
+    });
+
+    showTextButton5.addEventListener('click', function() {
+        // Verifica se l'area di testo è già visibile
+        if (textArea5.style.display === 'block') {
+            textArea5.style.display = 'none'; // Nascondi l'area di testo
+        } else {
+            // Mostra l'area di testo corrispondente al pulsante 1 e nasconde le altre
+            textArea5.style.display = 'block';
+            textArea2.style.display = 'none';
+            textArea3.style.display = 'none';
+            textArea4.style.display = 'none';
+            textArea1.style.display = 'none';
+            scrollToElement(textArea5);
+        }
+    });
+</script>
+</body>
+</html>

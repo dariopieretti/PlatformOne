@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Email</title>
+    <style>
+        /* Stili CSS per il report */
+        .header {
+            position: fixed; /* Posiziona la navbar in modo fisso */
+            top: 0; /* Posiziona la navbar in alto */
+            left: 0;
+            width: 80%; /* Imposta la larghezza al 100% della finestra */
+            padding: 1.3rem 10%;
+            background-color: rgba(0, 0, 0, .1);
+            backdrop-filter: blur(50px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px; /* Aggiunto margine sinistro */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #dadada;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 2.5rem;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #4eaa02;
+        }
+
+        .navbar a.active {
+            background-color: #555;
+            color: white;
+        }
+
+        h1 {
+            color: #f5f5f5; /* Colore del testo per i titoli */
+        }
+
+        body {
+                font-family: Titillium Web;
+                margin: 20px;
+                background-color: #333;
+                color: #f5f5f5;
+            }
+
+        h1 {
+            color: #f5f5f5;
+            text-align: center;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #414141;
+        }
+
+        .info-container,
+        .report-urls {
+            width: 100%;
+            box-sizing: border-box;s
+            padding: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            height: 100%; /* Imposta altezza al 100% */
+        }
+
+        .email-container {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+        .attachment-container {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+
+        .email-info,
+        .attachment-info,
+        .report-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+        }
+
+        .url-info {
+            margin-bottom: 10px;
+        }
+
+        .template-email {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-template {
+            background-color: #4fc47c;
+            color:#333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+        }
+
+        .button-template:hover {
+            background-color: #10a047;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 120px;
+            border-radius: 20px;
+        }
+
+        .button-container {
+            text-align: center; /* Allinea i pulsanti al centro */
+        }
+
+        .button-container button {
+            display: inline-block; /* Mostra i pulsanti sulla stessa riga */
+            margin: 0 10px; /* Aggiunge un po' di spazio tra i pulsanti */
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-content">
+            <img src="{{ url_for('static', filename='assets/img/cyber-security.png') }}" alt="PlatformOne" width="50" height="50">
+            <a class="logo">PlatformOne</a>
+        </div>
+        <div class="navbar">
+            <div>
+                <a href={{ url_for("index") }}>Home</a>
+                <a href={{ url_for("api_key_page") }}>Api key</a>
+                <a href={{ url_for("playbooks_templates") }}>Playbooks & Templates</a>
+            </div>
+        </div>
+    </header>
+    <div style="margin-top: 100px;" class="container">
+        <h1>Report Email</h1>
+
+        <div class="info-container">
+            <div class="email-container">
+                <div class="email-info">
+                    <h2>Informazioni sull'email:</h2>
+                    <p><strong>Mittente:</strong> {{ mittente }}</p>
+                    <p><strong>Destinatario:</strong> {{ destinatario }}</p>
+                    <p><strong>CC:</strong> {{ cc }}</p>
+                    <p><strong>Oggetto:</strong> {{ oggetto }}</p>
+                    <p><strong>Body:</strong></p>
+                    <p>{{ corpo_messaggio | replace('\n', '<br>') | safe }}</p>
+                </div>
+            </div>
+
+            <div class="attachment-container">
+                <div class="attachment-info">
+                    {% if allegati %}
+                        {% for attachment in allegati %}
+                            <h2>Informazioni sugli allegati:</h2>
+                            <p><strong>Nome allegato:</strong> {{ attachment.nome_allegato }} / {{ attachment.name_file }}</p>
+                            <p><strong>Hash allegato:</strong> {{ attachment.hash_allegato }}</p>
+                            <p><strong>Type:</strong> {{ attachment.type_HA }} / {{ attachment.name_file }}</p>
+                            <p><strong>Data di scansione dell'hash:</strong> {{ attachment.scan_date_hash }}</p>
+                            <p><strong>Verdetto Symantec:</strong> {{ attachment.symantec_verdict }}</p>
+                            <p><strong>Verdetto Fortinet:</strong> {{ attachment.fortinet_verdict }}</p>
+                            <p><strong>Verdetto Trend Micro:</strong> {{ attachment.trend_micro_verdict }}</p>
+                            <p><strong>Malicious Hash:</strong> {{ attachment.positives_hash }}</p>
+                            <p><strong>Harmless Hash:</strong> {{ attachment.total_hash }}</p>
+                            <!-- <p><strong>Percorso:</strong> {{ attachment.percorso_allegato }}</p> -->
+                            <h3>URLs nell'allegato:</h3>
+                            {% if attachment.urls %}
+                                <ul>
+                                    {% for url in attachment.urls %}
+                                        <li>{{ url }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Nessuna URL trovata nell'allegato.</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p>Nessun allegato all'interno della mail.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="report-urls">
+            <div class="report-container">
+                <h2>Report delle URL del body:</h2>
+                {% if url_results %}
+                    {% for url_result in url_results %}
+                        <div class="url-info">
+                            <p><strong>URL:</strong> {{ url_result.url }}</p>
+                            <p><strong>Report Fortinet:</strong> {{ url_result.fortinet_result }}</p>
+                            <p><strong>Data della scansione:</strong> {{ url_result.scan_date }}</p>
+                            <p><strong>Malicious:</strong> {{ url_result.positives }}</p>
+                            <p><strong>Harmless:</strong> {{ url_result.total }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nessun report disponibile per le URL del body.</p>
+                {% endif %}
+            </div>
+
+            <div class="report-container">
+                <div class="url-info">
+                    <h2>Report delle URL dell'allegato:</h2>
+                    {% if report_urls_allegato %}
+                        {% for url_info in report_urls_allegato %}
+                            <p><strong>URL:</strong> {{ url_info.url }}</p>
+                            <p><strong>Fortinet Result:</strong> {{ url_info.fortinet_result }}</p>
+                            <p><strong>Scan Date:</strong> {{ url_info.scan_date }}</p>
+                            <p><strong>Malicious:</strong> {{ url_info.positives }}</p>
+                            <p><strong>Harmless:</strong> {{ url_info.total }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Nessun report disponibile per le URL dell'allegato.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

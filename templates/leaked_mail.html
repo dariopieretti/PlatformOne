@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaks</title>
+    <style>
+        .header {
+            position: fixed; /* Posiziona la navbar in modo fisso */
+            top: 0; /* Posiziona la navbar in alto */
+            left: 0;
+            width: 80%; /* Imposta la larghezza al 100% della finestra */
+            padding: 1.3rem 10%;
+            background-color: rgba(0, 0, 0, .1);
+            backdrop-filter: blur(50px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px; /* Aggiunto margine sinistro */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #dadada;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 2.5rem;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #4eaa02;
+        }
+
+        .navbar a.active {
+            background-color: #555;
+            color: white;
+        }
+        body {
+            font-family: Titillium Web;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Colore di sfondo */
+            color: #f5f5f5;
+        }
+
+        h1 {
+            color: #19d600;
+        }
+        
+        h2,h3 {
+            color: #4fc47c; /* Colore del testo per i titoli */
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            background-color: #414141; /* Colore di sfondo */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-size: 18px;
+        }
+
+        .list {
+            list-style-type: none; /* Remove default list style */
+            padding: 0; /* Remove default padding */
+        }
+
+        .list li {
+            margin-bottom: 10px; /* Add some spacing between list items */
+        }
+        .list li a {
+            color: #f5f5f5;
+        }
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-content">
+            <img src="{{ url_for('static', filename='assets/img/cyber-security.png') }}" alt="PlatformOne" width="50" height="50">
+            <a href={{ url_for("index") }} class="logo">PlatformOne</a>
+        </div>
+        <div class="navbar">
+            <div>
+                <a href={{ url_for("index") }}>Home</a>
+                <a href={{ url_for("api_key_page") }}>Api key</a>
+                <a href={{ url_for("playbooks_templates") }}>Playbooks & Templates</a>
+                <a href={{ url_for("leaks_templates") }}>Leaks</a>
+            </div>
+        </div>
+    </header>
+    <div style="margin-top: 100px;" class="container">
+        <h3>Portali utili:</h3>
+        <ul class="list">
+            <li><a href="https://dehashed.com/"target="_blank">https://dehashed.com/</a></li>
+            <li><a href="https://haveibeenpwned.com/"target="_blank">https://haveibeenpwned.com/</a></li>
+            <li><a href="https://intelx.io/"target="_blank">https://intelx.io/</a></li>
+            <li><a href="https://leak-lookup.com"target="_blank">https://leak-lookup.com</a></li>
+            <li><a href="https://leakcheck.io/"target="_blank">https://leakcheck.io/</a></li>
+            <li><a href="https://breachdirectory.org/"target="_blank">https://breachdirectory.org/</a></li>
+        </ul>
+    </div>
+</body>
+</html>

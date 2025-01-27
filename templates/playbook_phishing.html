@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Playbook</title>
+    <style>
+        /* Stili CSS per centrare il contenuto */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 50px;
+            display: flex; /* Utilizziamo flexbox per il layout */
+            flex-direction: column; /* Disponiamo gli elementi in colonna */
+            align-items: center; /* Allineamento verticale al centro */
+        }
+
+        .content {
+            display: flex; /* Utilizziamo flexbox per il layout */
+            flex-direction: row; /* Disposizione in riga */
+            justify-content: space-between; /* Spazio tra le sezioni */
+            width: 100%; /* Occupa tutta la larghezza disponibile */
+        }
+
+        .left-content {
+            flex: 1; /* Il contenuto a sinistra occupa tutto lo spazio rimanente */
+            margin-right: 200px; /* Spazio tra il contenuto a sinistra e l'immagine */
+            text-align: left; /* Allinea il testo a sinistra */
+        }
+
+        .right-content img {
+            max-width: 100%; /* Larghezza massima dell'immagine */
+            height: auto; /* Altezza automatica per mantenere le proporzioni */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px; /* Spazio sopra il titolo */
+        }
+
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #a31212;
+        }
+
+        h3 {
+            color: #f5f5f5;
+            cursor: pointer; /* Cambia il cursore quando passa sopra */
+        }
+
+        h4 {
+            margin-left: 20px;
+            color: rgb(97, 97, 97);
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-left: 50px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none; /* Nasconde il contenuto */
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-template {
+            background-color: #4fc47c;
+            color:#333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+        }
+
+        .button-template:hover {
+            background-color: #10a047;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 120px;
+            border-radius: 20px;
+        }
+
+        .button-container {
+            text-align: center; /* Allinea i pulsanti al centro */
+        }
+
+        .button-container button {
+            display: inline-block; /* Mostra i pulsanti sulla stessa riga */
+            margin: 0 10px; /* Aggiunge un po' di spazio tra i pulsanti */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-button" style="text-decoration: none;"><button>Back</button></a>
+        <h1>Phishing Playbook</h1>
+        <div class="content">
+            <div class="left-content">
+                <h2>Detect</h2>
+                <h3 class="expand-collapse-btn">PD1 - Identify Threat Indicators</h3>
+                <div class="hidden"> <!-- Contenuto nascosto -->
+                    <h4>Alerts</h4>
+                    <ul>
+                        <li>SIEM</li>
+                        <li>Anti-Virus / EDR</li>
+                        <li>Reports</li>
+                        <li>Errori dal mail server</li>
+                    </ul>
+                    <h4>Notifications</h4>
+                    <ul>
+                        <li>Utenti</li>
+                        <li>...</li>
+                        <li>...</li>
+                    </ul>
+                </div>
+                <h3 class="expand-collapse-btn">PD2 - Identify Risks Factors</h3>
+                <div class="hidden"> <!-- Contenuto nascosto -->
+                    <h4>Common</h4>
+                    <ul>
+                        <li>Credential Theft</li>
+                        <li>Malware Delivery</li>
+                        <li>Criminal Activities (Blackmail / Ransom)</li>
+                    </ul>
+                    <h4>Company Specific</h4>
+                </div>
+                <h3 class="expand-collapse-btn">PD3 - Data Colletion</h3>
+                <div class="hidden"> <!-- Contenuto nascosto -->
+                    <h4>Domains</h4>
+                    <ul>
+                        <li>Reputation</li>
+                        <li>Registrar</li>
+                        <li>Owner</li>
+                        <li>IP</li>
+                        <li>Multistage / Redirect</li>
+                    </ul>
+                    <h4>IP</h4>
+                    <ul>
+                        <li>Reputation</li>
+                        <li>Owner</li>
+                        <li>Geo Localisation</li>
+                        <li>Other domains on that IP</li>
+                    </ul>
+                </div>
+                <h3 class="expand-collapse-btn">PD4 - Categorize</h3>
+                <div class="hidden"> <!-- Contenuto nascosto -->
+                    <h4>Phish</h4>
+                    <ul>
+                        <li>Company Site rip-off</li>
+                        <li>Common brand</li>
+                    </ul>
+                    <h4>Spear Phish</h4>
+                    <h4>Whaling</h4>
+                    <h4>Spam</h4>
+                </div>
+
+                <h3 class="expand-collapse-btn">PD5 - Triage</h3>
+                <div class="hidden"> <!-- Contenuto nascosto -->
+                    <h4>Impact</h4>
+                    <ul>
+                        <li>Of the message</li>
+                        <li>Financial</li>
+                        <li>Data loss</li>
+                    </ul>
+                    <h4>Scope </h4>
+                    <ul>
+                        <li>Recieved the message</li>
+                        <li>Opened the attachments</li>
+                        <li>Clicked on the links</li>
+                        <li>Submitted information</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-content">
+                <img src="{{ url_for('static', filename='assets/img/PhishingWorkflowDetect.png') }}" alt="Phishing Workflow">
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var expandCollapseBtns = document.querySelectorAll('.expand-collapse-btn');
+
+            expandCollapseBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var content = this.nextElementSibling;
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

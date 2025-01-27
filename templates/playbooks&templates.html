@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbooks&Templates</title>
+    <style>
+        .header {
+            position: fixed; /* Posiziona la navbar in modo fisso */
+            top: 0; /* Posiziona la navbar in alto */
+            left: 0;
+            width: 80%; /* Imposta la larghezza al 100% della finestra */
+            padding: 1.3rem 10%;
+            background-color: rgba(0, 0, 0, .1);
+            backdrop-filter: blur(50px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 10px; /* Aggiunto margine sinistro */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #dadada;
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 2.5rem;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            color: #4eaa02;
+        }
+
+        .navbar a.active {
+            background-color: #555;
+            color: white;
+        }
+        body {
+            font-family: Titillium Web;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Colore di sfondo */
+            color: #f5f5f5;
+        }
+
+        h1 {
+            color: #f5f5f5; /* Colore del testo per i titoli */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            background-color: #414141; /* Colore di sfondo */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-size: 18px;
+        }
+
+        .api-list {
+            list-style-type: none; /* Remove default list style */
+            padding: 0; /* Remove default padding */
+        }
+
+        .api-list li {
+            margin-bottom: 10px; /* Add some spacing between list items */
+        }
+
+        .button-template {
+            background-color: #19d600;
+            color:#1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; /* Aggiunto margine per separare il pulsante */
+        }
+
+        .button-template:hover {
+            background-color: #4eaa02;
+        }
+
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-content">
+            <img src="{{ url_for('static', filename='assets/img/cyber-security.png') }}" alt="PlatformOne" width="50" height="50">
+            <a class="logo">PlatformOne</a>
+        </div>
+        <div class="navbar">
+            <div>
+                <a href={{ url_for("index") }}>Home</a>
+                <a href={{ url_for("api_key_page") }}>Api key</a>
+                <a href={{ url_for("playbooks_templates") }}>Playbooks & Templates</a>
+                <a href={{ url_for("leaks_templates") }}>Leaks</a>
+            </div>
+        </div>
+    </header>
+
+    <h1 style="margin-top: 100px;">Playbooks & Templates</h1>
+    <div class="container">
+        <div class="card">
+            <form action="/playbook_phishing_page" method="get">
+                <button type="submit" class="button-template" style="margin-bottom: 20px;">Phishing</button>
+            </form>
+    
+            <form action="/template_email_page" method="get">
+                <button type="submit" class="button-template">Templates email</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
